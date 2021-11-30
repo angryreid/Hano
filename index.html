@@ -5,62 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>hano</title>
-    <style>
-      html,
-      body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-      }
-      .header {
-        display: flex;
-        width: 100%;
-      }
-      .header > #number {
-        flex: 1;
-        height: 28px;
-      }
-      .header > .button {
-        width: 10%;
-        height: 34px;
-        align-items: center;
-      }
-      #contain {
-        display: flex;
-        justify-content: center;
-        width: 100%;
-        background: skyblue;
-        padding: 10px;
-        box-sizing: border-box;
-        text-align: center;
-        user-select: none;
-        flex-wrap: wrap;
-      }
-      .box {
-        width: 100%;
-        justify-content: space-between;
-        display: flex;
-      }
-      .item {
-        width: 32%;
-        display: inline-block;
-        box-sizing: border-box;
-        background: #ffffff;
-        border: 1px solid #ffffff;
-        border-radius: 10px;
-        overflow: hidden;
-      }
-      .item p {
-        font-size: 20px;
-        font-weight: bolder;
-        border-top: 1px solid #ffffff;
-        border-bottom: 1px solid #ffffff;
-      }
-      .item > .area div {
-        margin: 0 auto;
-        height: 20px;
-      }
-    </style>
+    <link rel="stylesheet" href="./src/styles/index.css">
   </head>
 
   <body>
@@ -69,7 +14,6 @@
         id="number"
         type="text"
         placeholder="please input number..."
-        onchange="watchInput"
       />
       <button class="button" id="next">next ></button>
       <button class="button" id="end">end</button>
@@ -91,123 +35,6 @@
         </div>
       </div>
     </div>
-    <script>
-      var maxNumber = 10;
-
-      // 点击开始按钮事件
-      window.onload = function () {
-        var end = document.getElementById("end");
-        var A = document.getElementById("A");
-        var B = document.getElementById("B");
-        var C = document.getElementById("C");
-        getInputDom().addEventListener(
-          "input",
-          debounce(watchInput, 300, true)
-        );
-        end.addEventListener("click", () => {
-          hano(getInputDom().value, A, B, C);
-        });
-      };
-
-      // 获取输入值
-      function getInputDom() {
-        return document.getElementById("number");
-      }
-
-      // 渲染汉诺塔初始化
-      function init(number, A, B, C) {
-        // 清空柱子C
-        C.innerHTML = "";
-        let htmlA = "";
-        // 渲染柱子A
-        for (let i = 0; i < number; i++) {
-          htmlA += `<div style='width:${
-            100 * ((i + 1) / number)
-          }%;background: ${randomColor()}'>${i + 1}</div>`;
-        }
-        A.innerHTML = htmlA;
-        [A, B, C].forEach((dom) => calcHeight(dom, number));
-      }
-
-      // 生成随机颜色
-      function randomColor() {
-        var colors = [
-          "0",
-          "1",
-          "2",
-          "3",
-          "4",
-          "5",
-          "6",
-          "7",
-          "8",
-          "9",
-          "a",
-          "b",
-          "c",
-          "d",
-          "e",
-          "f",
-        ];
-        var color = "#";
-        for (var i = 0; i < 6; i++) {
-          color += colors[Math.floor(Math.random() * 16)];
-        }
-        return color;
-      }
-
-      // 执行汉诺塔
-      function hano(n, A, B, C) {
-        if (Number.isNaN(Number(n)) || !Number.isInteger(Number(n))) return;
-        if (n == 1) {
-          //汉诺塔移动代码
-          moveHano(A, C);
-        } else {
-          hano(n - 1, A, C, B);
-          hano(1, A, B, C);
-          hano(n - 1, B, A, C);
-        }
-      }
-
-      function moveHano(A, C) {
-        // objA 内部第一个元素 objA.childNodes[0]
-        debugger;
-        if (C.childNodes[0]) {
-          C.insertBefore(A.childNodes[0], C.childNodes[0]);
-        } else {
-          C.appendChild(A.childNodes[0]);
-        }
-      }
-
-      function calcHeight(dom, count) {
-        dom.style.height = count * 20 + "px";
-      }
-
-      function watchInput(e) {
-        if (e.target.value == "") {
-          return;
-        }
-        if (e.target.value > maxNumber) {
-          e.target.value = maxNumber;
-        }
-        init(getInputDom().value, A, B, C);
-      }
-
-      function debounce(event, time, callNow) {
-        let timer = null;
-        return function (...args) {
-          clearTimeout(timer);
-
-          if (callNow && !timer) {
-            event.apply(this, args);
-          }
-
-          timer = setTimeout(() => {
-            // this point at return function, not excute function
-            event.apply(this, args);
-          }, time);
-        };
-      }
-    </script>
+    <script src="./src/js/index.js" type="module"></script>
   </body>
 </html>
