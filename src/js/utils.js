@@ -41,8 +41,8 @@ export function randomColor() {
   return color;
 }
 
-export function calcHeight(dom, count, number = 20) {
-  dom.style.height = count * number + "px";
+export function calcHeight(dom, count, number = 20, titleHeight = 70) {
+  dom.style.height = count * number + titleHeight + "px";
 }
 
 // 获取输入值
@@ -61,7 +61,7 @@ function init(number, A, B, C) {
     }%;background: ${randomColor()}'>${i + 1}</div>`;
   }
   A.innerHTML = htmlA;
-  [A, B, C].forEach((dom) => calcHeight(dom, number));
+  [A, B, C].forEach((dom) => calcHeight(dom.parentElement, number));
   
 }
 

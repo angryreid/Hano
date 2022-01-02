@@ -35,13 +35,19 @@ body {
 }
 .item {
   width: 32%;
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
   box-sizing: border-box;
   background: #ffffff;
   border: 1px solid #ffffff;
   border-radius: 10px;
   overflow: hidden;
 }
+
+.item section {
+  flex: 1;
+}
+
 .item p {
   font-size: 20px;
   font-weight: bolder;
