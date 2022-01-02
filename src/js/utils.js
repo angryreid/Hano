@@ -51,8 +51,10 @@ export function getInputDom(input) {
 }
 // 渲染汉诺塔初始化
 function init(number, A, B, C) {
-  // 清空柱子C
-  C.innerHTML = "";
+  // 清空柱子
+  [A, B, C].forEach(ele => {
+    ele.innerHTML = '';
+  });
   let htmlA = "";
   // 渲染柱子A
   for (let i = 0; i < number; i++) {

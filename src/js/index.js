@@ -54,7 +54,7 @@ class Hano {
   }
 
   moveNextStep() {
-    this.hanoQueue.shift().next();
+    this.hanoQueue.length && this.hanoQueue.shift().next();
   }
 
   moveAllSteps() {
